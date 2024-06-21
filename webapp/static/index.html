@@ -38,7 +38,35 @@ img{
               <p>Use the buttons below to make use of the interactive (OpenAPI) documentation for trying out the API dynamically.
                 or browse the project source.
               </p>
-              <button onclick="window.location.href='/docs'" type="button" class="btn btn-info">Try it out</button>
+              <!-- create an interactive form with text input and button, and add event listener to button to send POST request to /generate endpoint and display response in a div with id "result" -->
+              <form id="form">
+                <select id="input">
+                  <option value="5">5</option>
+                  <option value="10">10</option>
+                  <option value="15">15</option>
+                  <option value="20">20</option>
+               </select>
+                <button type="button" id="button" class="btn btn-info">Generate</button>
+              </form>
+              <div id="result"></div>
+              <script>
+                const button = document.getElementById('button');
+                const form = document.getElementById('form');
+                button.addEventListener('click', async (event) => {
+                  event.preventDefault();
+                  const input = document.getElementById('input').value;
+                  const response = await fetch('/generate', {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ text: input })
+                  });
+                  const data = await response.json();
+                  const result = document.getElementById('result');
+                  result.innerHTML = data.token;
+                });
+              </script>
               <button onclick="window.location.href='https://github.com/microsoft/codespaces-project-template-py/'" type="button" class="btn btn-info">Project source</button>
             </div>
           </div>
