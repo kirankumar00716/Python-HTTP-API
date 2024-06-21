@@ -2,9 +2,9 @@ name: Build and deploy Python app to Azure Web App
 
 env:
   AZURE_WEBAPP_NAME: demo-fastapi-215367339 # set this to your application's name
-  WORKING_DIRECTORY: '.' # set this to the path to your path of working directory inside github repository, defaults to the repository root
-  PYTHON_VERSION: '3.9' 
-  STARTUP_COMMAND: 'gunicorn -w 2 -k uvicorn.workers.UvicornWorker webapp.main:app' # set this to the startup command required to start the gunicorn server. default it is empty
+  WORKING_DIRECTORY: '.' # set this to the path to your working directory inside the GitHub repository, defaults to the repository root
+  PYTHON_VERSION: '3.9'
+  STARTUP_COMMAND: 'gunicorn -w 2 -k uvicorn.workers.UvicornWorker webapp.main:app' # set this to the startup command required to start the gunicorn server, default it is empty
 
 on:
   # uncomment the next two lines to deploy on every push to main
@@ -21,17 +21,18 @@ jobs:
   environment: dev
   steps:
   # checkout the repo 
-  - uses: actions/checkout@master
+  - uses: actions/checkout@v2
   # setup python
   - name: Setup Python
-    uses: actions/setup-python@v1
+    uses: actions/setup-python@v2
     with:
      python-version: ${{ env.PYTHON_VERSION }}
   # install dependencies
-  - name: python install
+  - name: Install dependencies
     working-directory: ${{ env.WORKING_DIRECTORY }}
     run: |
-     sudo apt install python${{ env.PYTHON_VERSION }}-venv
+     sudo apt-get update
+     sudo apt-get install -y python${{ env.PYTHON_VERSION }}-venv
      python -m venv --copies antenv
      source antenv/bin/activate
      pip install setuptools
@@ -52,6 +53,6 @@ jobs:
      package: ${{ env.WORKING_DIRECTORY }}
      startup-command: ${{ env.STARTUP_COMMAND }}
   # Azure logout
-  - name: logout
+  - name: Logout
     run: |
      az logout
