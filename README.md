@@ -1,10 +1,10 @@
+## Deployment Link:
+[demo-fastapi-215367339.azurewebsites.net](https://demo-fastapi-215367339.azurewebsites.net/)
+
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=526682400)
 
 # Python HTTP API with GitHub Codespaces and Copilot
-
-## Deployment Link:
-demo-fastapi-215367339.azurewebsites.net
-
+1
 _Run a Python API in this ready-to-use-repository in minutes_
 
 By opening this template respository in Codespaces, you can quickly get hands-on with a Python web app that serves an HTTP API. You'll get to focus on working with the project instead of setup and configuration. And then you'll make changes to the code using [GitHub Copilot](https://copilot.github.com/), a new AI-powered code completion tool that helps you write code faster.
